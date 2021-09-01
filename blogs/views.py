@@ -11,7 +11,7 @@ class BlogViewSet(viewsets.ViewSet):
         serializer = BlogsSerializer(blogs, many=True)
         return Response(serializer.data)
 
-    def create(self, request):  #/api/products
+    def create(self, request):  #/api/blogs
         serializer = BlogsSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
