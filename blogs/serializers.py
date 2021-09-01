@@ -3,6 +3,6 @@ from .models import Blogs
 
 
 class BlogsSerializer(serializers.ModelSerializer):
-    class meta:
+    class Meta:
         model = Blogs
         fields = '__all__'
