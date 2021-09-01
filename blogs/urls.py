@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from blogs.views import BlogViewSet
+from blogs.views import BlogViewSet, UserAPIView
 
 urlpatterns = [
     path('blogs', BlogViewSet.as_view({
@@ -12,4 +12,5 @@ urlpatterns = [
         'put': 'update',
         'delete': 'delete'
     })),
+    path('user', UserAPIView.as_view())
 ]

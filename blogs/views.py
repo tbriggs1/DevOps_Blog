@@ -1,9 +1,11 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_204_NO_CONTENT
+from rest_framework.views import APIView
 
-from .models import Blogs
+from .models import Blogs,User
 from .serializers import BlogsSerializer
+import random
 
 class BlogViewSet(viewsets.ViewSet):
     def list(self, request):  #/api/products
@@ -33,3 +35,11 @@ class BlogViewSet(viewsets.ViewSet):
         blog = Blogs.objects.get(id=pk)
         blog.delete()
         return Response(status=HTTP_204_NO_CONTENT)
+
+class UserAPIView(APIView):
+    def get(self, _):
+        users = User.objects.all()
+        user = random.choice(users)
+        return Response({
+            'id': user.id
+        })
