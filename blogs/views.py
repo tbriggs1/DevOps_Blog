@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
-
+from rest_framework.status import HTTP_201_CREATED
 
 from .models import Blogs
 from .serializers import BlogsSerializer
@@ -12,7 +12,10 @@ class BlogViewSet(viewsets.ViewSet):
         return Response(serializer.data)
 
     def create(self, request):  #/api/products
-        pass
+        serializer = BlogsSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=HTTP_201_CREATED)
 
     def retrieve(self, request, pk=None): #/api/products/<str:id>
         pass
