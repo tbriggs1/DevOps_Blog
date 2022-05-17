@@ -5,9 +5,4 @@ from flask_jwt import jwt_required
 class Blogs(Resource):
 
     def get(self):
-
-        response_body = {
-            BlogModel.get_all_blogs()
-        }
-
-        return response_body
+        return {'blogs': list(map(lambda x: x.json(), BlogModel.query.all()))}

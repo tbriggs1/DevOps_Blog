@@ -14,7 +14,7 @@ api = Api(app)
 
 app.config[
     "SQLALCHEMY_DATABASE_URI"
-] = "postgresql://tbriggs:example@172.18.0.1/postgres"
+] = "postgresql://tbriggs:example@localhost/postgres"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = "supersecret"
 db.init_app(app)

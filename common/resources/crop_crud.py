@@ -13,7 +13,7 @@ class Blog(Resource):
         data = request.get_json()
         blog = BlogModel.query.filter_by(title=data["title"]).first()
         result = {"title": blog.title, "description": blog.description,
-                  "image": blog.image, "date": blog.date }
+                  "image": blog.image, "date": blog.blog_date}
 
         return {"user": result}
 
@@ -25,7 +25,7 @@ class Blog(Resource):
                 title=data["title"],
                 description=data["description"],
                 image=data["image"],
-                blog_date=data["blog_data"]
+                blog_date=data["blog_date"]
             )
             db.session.add(new_blog)
             db.session.commit()

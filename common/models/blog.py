@@ -13,12 +13,15 @@ class BlogModel(db.Model):
     def __init__(self, id, title, blog_date, description, image):
         self.id = id
         self.title = title
-        self.blod_date = blog_date
+        self.date = blog_date
         self.description = description
         self.image = image
 
     def __repr__(self):
-        return f"<User {self.username}>"
+        return f"<User {self.title}>"
+
+    def json(self):
+        return {'id': self.id, 'title': self.title, 'description': self.description, 'image': self.image, 'date': self.blog_date}
 
     @classmethod
     def get_all_blogs(cls):
