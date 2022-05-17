@@ -8,20 +8,21 @@ import uuid
 
 class Blog(Resource):
 
-    # TODO - Add for login @jwt_required()
     def get(self):
-        data = request.get_json()
-        blog = BlogModel.query.filter_by(title=data["title"]).first()
+        data = request.args.get('id')
+        print(data)
+        print(type(data))
+        blog = BlogModel.query.filter_by(id=data).first()
         result = {"title": blog.title, "description": blog.description,
                   "image": blog.image, "date": blog.blog_date}
 
-        return {"user": result}
+        return {"blog": result}
 
     def post(self):
         if request.json:
             data = request.get_json()
             new_blog = BlogModel(
-                id=str(uuid.uuid4),
+                id=str(uuid.uuid4()),
                 title=data["title"],
                 description=data["description"],
                 image=data["image"],

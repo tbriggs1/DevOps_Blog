@@ -13,7 +13,7 @@ class BlogModel(db.Model):
     def __init__(self, id, title, blog_date, description, image):
         self.id = id
         self.title = title
-        self.date = blog_date
+        self.blog_date = blog_date
         self.description = description
         self.image = image
 
