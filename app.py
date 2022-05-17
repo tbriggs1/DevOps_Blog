@@ -3,10 +3,10 @@ from flask_restful import Api
 from flask_jwt import JWT
 from security import authenticate, identity
 import os
-from common.resources.users import Users
+from common.resources.blogs import Blogs
 from common.resources.user_crud import User
 from common.configuration.db import db
-from common.resources.crop_crud import Crop
+from common.resources.crop_crud import Blog
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -14,7 +14,7 @@ api = Api(app)
 
 app.config[
     "SQLALCHEMY_DATABASE_URI"
-] = "postgresql://tbriggs:example@51.89.220.72/postgres"
+] = "postgresql://tbriggs:example@172.18.0.1/postgres"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = "supersecret"
 db.init_app(app)
@@ -31,8 +31,8 @@ def create_tables():
 
 
 api.add_resource(User, "/user")
-api.add_resource(Users, "/profile")
-api.add_resource(Crop, "/crop")
+api.add_resource(Blogs, "/blogs")
+api.add_resource(Blog, "/blog")
 
 
 if __name__ == "__main__":

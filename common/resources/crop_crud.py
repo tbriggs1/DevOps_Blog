@@ -1,50 +1,52 @@
 from flask_restful import Resource
 from flask import request
 from flask_jwt import jwt_required
-from common.models.crop import CropModel
+from common.models.blog import BlogModel
 from common.configuration.db import db
 import uuid
 
 
-class Crop(Resource):
+class Blog(Resource):
 
     # TODO - Add for login @jwt_required()
     def get(self):
         data = request.get_json()
-        crops = CropModel.query.filter_by(username=data["username"]).first()
-        result = {"crop": crops.name, "planted": crops.time_planted}
+        blog = BlogModel.query.filter_by(title=data["title"]).first()
+        result = {"title": blog.title, "description": blog.description,
+                  "image": blog.image, "date": blog.date }
 
         return {"user": result}
 
     def post(self):
         if request.json:
             data = request.get_json()
-            new_crop = CropModel(
+            new_blog = BlogModel(
                 id=str(uuid.uuid4),
-                name=data["name"],
-                time_planted=data["time_planted"],
-                username=data["username"],
+                title=data["title"],
+                description=data["description"],
+                image=data["image"],
+                blog_date=data["blog_data"]
             )
-            db.session.add(new_crop)
+            db.session.add(new_blog)
             db.session.commit()
 
-            return {"Message": f"Crop {new_crop.name} has been created successfully"}
+            return {"Message": f"Blog {new_blog.title} has been created successfully"}
 
-        return {"Error": "Unable to create user"}
+        return {"Error": "Unable to create blog"}
 
     def delete(self, id):
-        crop = CropModel.query.get_or_404(id)
-        db.session.delete(crop)
+        blog = BlogModel.query.get_or_404(id)
+        db.session.delete(blog)
         db.session.commit()
-        return {"message": "crop deleted"}
+        return {"message": "blog deleted"}
 
     def put(self, id):
-        crop = CropModel.query.get_or_404(id)
+        blog = BlogModel.query.get_or_404(id)
         data = request.get_json()
-        crop.name = data["name"]
-        crop.time_planted = data["time_planted"]
-        crop.username = data["username"]
+        blog.title = data["title"]
+        blog.description = data["description"]
+        blog.image = data["image"]
 
-        db.session.add(crop)
+        db.session.add(blog)
         db.session.commit()
         return {"message": "Successfully updated crop details"}
