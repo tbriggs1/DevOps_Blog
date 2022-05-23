@@ -11,4 +11,4 @@ COPY . /app
 
 ENTRYPOINT [ "python" ]
 
-CMD ["app.py --cert=adhoc"]
+CMD ["app.py"]
