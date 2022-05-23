@@ -10,4 +10,4 @@ COPY . /app
 
 ENTRYPOINT [ "python" ]
 
-CMD ["app.py"]
+CMD ["flask run --cert=adhoc"]
