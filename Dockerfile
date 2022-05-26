@@ -5,8 +5,6 @@ COPY ./requirements.txt /app/requirements.txt
 WORKDIR /app
 
 RUN pip install -r requirements.txt
-RUN pip install --no-cache-dir \
-    gunicorn \
 
 
 COPY . /app
