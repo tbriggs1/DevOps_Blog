@@ -9,6 +9,6 @@ RUN pip install -r requirements.txt
 
 COPY . /app
 
-EXPOSE 5000
+ENTRYPOINT [ "python" ]
 
-CMD ["python3", "-m", "gunicorn", "-w", "4", "-b", "0.0.0.0:5002", "--certfile", "/etc/letsencrypt/live/tbriggserver.co.uk-0001/fullchain.pem", "--keyfile", "/etc/letsencrypt/live/tbriggserver.co.uk-0001/privkey.pem", "app:app", "--timeout", "120"]
+CMD ["app.py"]
