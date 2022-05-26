@@ -8,9 +8,13 @@ from common.resources.user_crud import User
 from common.configuration.db import db
 from common.resources.crop_crud import Blog
 from flask_cors import CORS
+import ssl
+from flask_talisman import Talisam
 
 app = Flask(__name__)
 api = Api(app)
+
+Talisam(app, content_security_policy=None)
 
 app.config[
     "SQLALCHEMY_DATABASE_URI"
@@ -38,4 +42,4 @@ api.add_resource(Blog, "/blog")
 if __name__ == "__main__":
 
     port = int(os.environ.get("PORT", 5000))
-    app.run(debug=True, host="0.0.0.0", port=port)
+    app.run(debug=True, host="0.0.0.0", port=port, ssl_context=('certificate.pem', 'key.pem'))
