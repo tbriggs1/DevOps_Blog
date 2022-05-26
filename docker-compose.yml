@@ -13,6 +13,6 @@ services:
   app:
     build: .
     ports:
-      - "443:5002"
+      - "5002:5002"
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
